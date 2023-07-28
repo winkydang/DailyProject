@@ -1,0 +1,7 @@
+import jwt
+
+token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjczMzQyODQ0LCJleHAiOjE2NzE2Mzk4NzcsImxvZ2luVGltZSI6IjE2NzMzNDI4NDQ2ODkiLCJleHBpcmVUaW1lIjoiVGh1IERlYyAyMiAwMDoyNDozNyBDU1QgMjAyMiIsInVzZXJfbmFtZSI6IueuoeeQhuWRmCIsInVzZXJfY29kZSI6ImFkbWluIiwibG9naW5fdXNlcl9rZXkiOiJlMWVhODFhMi04MGUzLTQ5MzgtYmUxMy1hN2NjOWI1N2VmNWYifQ.tiJh79ByAn8QYoA7bj8--PfaA7d3Ew3DgLGklTRNwTQ"
+decode = jwt.decode(token, algorithms="HS256", options={"verify_signature": False})
+user_code = decode['user_code']
+print(decode)
+print(user_code)
