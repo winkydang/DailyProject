@@ -11,12 +11,13 @@ import torch
 # y'|(x=2) = 2 * (x ** 2)/x  = 4x|x=2 = 8
 # y'|(x=10) = 2 * (x ** 2)/x  = 4x|x=10 = 40
 
+
 # 单标量张量梯度计算
 def test01():
     # 定义一个标量张量(点)
     # requires_grad=:默认为False,不会自动计算梯度;为True的话是将自动计算的梯度值保存到grad中
     x = torch.tensor(10, requires_grad=True, dtype=torch.float32)  # x: tensor(10., requires_grad=True)
-    print("x-->", x)
+    print("x-->", x)  # x--> tensor(10., requires_grad=True)
     print(id(x))  # 5449220560
     # 定义一个曲线
     y = 2 * x ** 2  # y: tensor(200., grad_fn=<MulBackward0>)
@@ -37,7 +38,7 @@ def test01():
     x.data = x.data - 0.001 * x.grad
     # 打印更新后的x值
     print(x)  # tensor(9.9600, requires_grad=True)
-    print(id(x))  # 5449220560
+    print(id(x))  # 5449220560   # # x.data是修改开始x内存中的内部数据,前后x的内存空间一样;如果使用x,此时前后x的内存空间不同
 
 
 if __name__ == '__main__':
