@@ -166,3 +166,7 @@ cython_debug/
 /out_file/
 /test_web/file/
 /file/
+/test1/file/
+/test1/conf.py
+/test1/insert_cls.py
+

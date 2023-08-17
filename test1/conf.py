@@ -1,0 +1,5 @@
+linkserver="114.113.127.115"
+# linkserver = "192.168.188.23"
+linkusername = "root"
+linkpassword = "zrty888."
+linkname = "linkdata"
