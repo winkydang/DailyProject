@@ -16,8 +16,8 @@ def create_dataset():
     x, y, coef = make_regression(n_samples=100,  # 样本数
                                  n_features=1,  # 样本特征数
                                  noise=10,  # 噪音值,样本的标准差
-                                 coef=True,  # 是否返回线性模型的系数
-                                 bias=14.5,  # 线性模型的截距
+                                 coef=True,  # 是否返回线性模型的系数   coef相当于y=wx+b中的 w
+                                 bias=14.5,  # 线性模型的截距    bias相当于y=wx+b中的 b
                                  random_state=0)  # 随机数种子
     print('type(x): ', type(x), 'x.shape: ', x.shape)  # type(x):  <class 'numpy.ndarray'> x.shape:  (100, 1)
     print('type(y): ', type(y), 'y.shape: ', y.shape)  # type(y):  <class 'numpy.ndarray'> y.shape:  (100,)
@@ -92,8 +92,8 @@ def sgd(batch_size, learning_rate=0.01):
         :param batch_size: 使用批量样本的平均梯度,为批量样本数量
         :param learning_rate: 学习率,默认为0.01
         """
-    w.data = w.data - learning_rate * w.grad / batch_size
-    b.data = b.data - learning_rate * b.grad / batch_size
+    w.data = w.data - learning_rate * w.grad / batch_size  # 使用批量样本的平均梯度  # w.data:tensor(1.3011, dtype=torch.float64)   w.grad: tensor(-1080.1493, dtype=torch.float64)  batch_size: 16
+    b.data = b.data - learning_rate * b.grad / batch_size  # b.data: tensor(0.6318, dtype=torch.float64)   b.grad: tensor(-890.0867, dtype=torch.float64)
 
 
 # 训练模型
@@ -112,13 +112,29 @@ def train():
         for train_x, train_y in data_loader(x, y, 16):
             # 模型训练
             y_pred = linear_regression(train_x)
+            # tensor([[ 0.1139],
+            # [ 0.2270],
+            # [ 0.0156],
+            # [-0.2553],
+            # [-0.0854],
+            # [-0.0348],
+            # [-0.1536],
+            # [-0.0403],
+            # [-0.1726],
+            # [ 0.0444],
+            # [-0.1981],
+            # [ 0.0356],
+            # [-0.0511],
+            # [-0.0438],
+            # [-0.1165],
+            # [-0.1614]], dtype=torch.float64, grad_fn=<AddBackward0>)
             # 计算损失值
             # 每批次总损失值
             # train_y.reshape(-1,1):保证y_true和y_pred形状一致
-            loss = square_loss(y_pred, train_y.reshape(-1, 1)).sum()
+            loss = square_loss(y_pred, train_y.reshape(-1, 1)).sum()  # tensor(39869.1028, dtype=torch.float64, grad_fn=<SumBackward0>)
             # 计算每次训练的总损失值
             # loss是一个张量,loss.item()获取张量中的损失值
-            total_loss += loss.item()
+            total_loss += loss.item()  # loss.item: {float}47777.95633225211
             # 统计多少个样本数据进行了模型训练
             train_sample += len(train_y)
 
@@ -130,13 +146,13 @@ def train():
             # 计算梯度值,反向传播
             loss.backward()
             # 更新梯度值
-            sgd(16, learning_rate)  # 梯度下降法更新 w 和 b 的值
-            print('loss: %.10f' % (total_loss / train_sample))
+            sgd(16, learning_rate)  # 随机梯度下降法更新 w 和 b 的值
+            print('loss: %.10f' % (total_loss / train_sample))  # total_loss: 81037.81120313765   train_sample: 32
         # 保存每次迭代训练的损失值, 100次训练结果的损失值
         epoch_loss.append(total_loss / train_sample)
 
     # 查看真实模型和训练模型的系数,w是张量,通过.data.item()获取张量中的系数值
-    print(coef, w.item())  # 42.38550485581797 42.69298939437004
+    print(coef, w.item())  # 42.38550485581797 42.69298939437004  # coef: array(42.38550486)   w: tensor(42.6439, dtype=torch.float64, requires_grad=True)   w.item(): 42.64389147367555
     print(b.item())  # 13.733376403360259
     # 绘制真实数据样本分布图
     plt.scatter(x, y)
