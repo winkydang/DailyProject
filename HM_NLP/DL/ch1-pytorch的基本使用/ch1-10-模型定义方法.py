@@ -1,3 +1,6 @@
+"""
+    学习目标：掌握PyTorch构建线性回归相关api
+"""
 import torch
 from torch.utils.data import TensorDataset  # 构造数据集对象
 from torch.utils.data import DataLoader  # 数据加载器
