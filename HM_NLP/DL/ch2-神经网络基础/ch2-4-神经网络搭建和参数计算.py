@@ -4,7 +4,7 @@ from torchsummary import summary  # 计算模型参数,查看模型结构, pip i
 
 
 # 创建神经网络模型类
-class Model(nn.Module):
+class Model(nn.Module):  # 继承自torch.nn.Module的类
     # 初始化属性值
     def __init__(self):
         # 调用父类的初始化属性值
@@ -12,7 +12,7 @@ class Model(nn.Module):
         # 创建第一个隐藏层模型, 3个输入特征,3个输出特征
         self.linear1 = nn.Linear(3, 3)
         # 初始化权重
-        nn.init.xavier_normal_(self.linear1.weight)
+        nn.init.xavier_normal_(self.linear1.weight)  # xavier 正态分布初始化
         # 创建第二个隐藏层模型, 3个输入特征(上一层的输出特征),2个输出特征
         self.linear2 = nn.Linear(3, 2)
         # 初始化权重
@@ -21,15 +21,15 @@ class Model(nn.Module):
         self.out = nn.Linear(2, 2)
 
     # 创建前向传播方法,自动执行forward()方法
-    def forward(self, x):
+    def forward(self, x):  # forward方法定义了模型的前向传播逻辑，它描述了数据在模型中的流动方式，即如何从输入产生输出。因此，当你调用模型并传递输入数据时，PyTorch会自动执行forward方法以计算模型的输出。
         # 数据经过第一个线性层
         x = self.linear1(x)
-        # 使用sigmoid激活函数
+        # 第一个隐藏层使用sigmoid激活函数
         x = torch.sigmoid(x)
 
         # 数据经过第二个线性层
         x = self.linear2(x)
-        # 使用relu激活函数
+        # 第二个隐藏层使用relu激活函数
         x = torch.relu(x)
 
         # 数据经过输出层
@@ -54,7 +54,7 @@ def train():
     print("my_data shape", my_data.shape)
 
     # 数据经过神经网络模型训练
-    output = my_model(my_data)
+    output = my_model(my_data)  # 创建模型时自动调用forward()函数
     print("output-->", output)
     print("output shape-->", output.shape)
 
