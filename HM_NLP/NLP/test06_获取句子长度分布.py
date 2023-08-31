@@ -16,8 +16,8 @@ def dm_len_sns_countplot_distplot():
     plt.style.use('fivethirtyeight')
 
     # 2 pd.read_csv 读训练集 验证集数据
-    train_data = pd.read_csv(filepath_or_buffer='./cn_data/train.tsv', sep='\t')
-    dev_data = pd.read_csv(filepath_or_buffer='./cn_data/dev.tsv', sep='\t')
+    train_data = pd.read_csv(filepath_or_buffer='../cn_data/train.tsv', sep='\t')
+    dev_data = pd.read_csv(filepath_or_buffer='../cn_data/dev.tsv', sep='\t')
 
     # 3 求数据长度列 然后求数据长度的分布
     train_data['sentence_length'] =  list( map(lambda x: len(x), train_data['sentence']))

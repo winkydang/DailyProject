@@ -42,7 +42,7 @@ def dm_word_cloud():
     # 1 获得训练集上正样本p_train_data
     #   eg: 先使用逻辑==操作检索符合正样本 train_data[train_data['label'] == 1]
     # train_data = pd.read_csv(filepath_or_buffer='./cn_data/train.tsv', sep='\t')
-    train_data = pd.read_csv(filepath_or_buffer='./cn_data/dev.tsv', sep='\t')
+    train_data = pd.read_csv(filepath_or_buffer='../cn_data/dev.tsv', sep='\t')
     p_train_data = train_data[train_data['label'] == 1 ]['sentence']
 
     # 2 获取正样本的每个句子的形容词 p_a_train_vocab = chain(*map(a,b))

@@ -81,7 +81,7 @@ import fasttext
 # print(model.get_nearest_neighbors('apple'))
 # print(model.get_word_vector('the'))
 
-mymodel = fasttext.load_model('./data/test.bin')
+mymodel = fasttext.load_model('../data/test.bin')
 print(mymodel.get_nearest_neighbors('apple'))
 myvector = mymodel.get_word_vector('the')
 print('myvector->', type(myvector), myvector.shape, myvector)
