@@ -74,23 +74,23 @@
 # # Decorator 2 - After
 # # Decorator 1 - After
 
-# 3. 类装饰器
-class MyDecorator:
-    def __init__(self, func):
-        self.func = func
+# # 3. 类装饰器
+# class MyDecorator:
+#     def __init__(self, func):
+#         self.func = func
+#
+#     def __call__(self, *args, **kwargs):
+#         print("Before the function is called")
+#         result = self.func(*args, **kwargs)
+#         print("After the function is called")
+#         return result
+#
+# @MyDecorator
+# def say_hello(name):
+#     print(f"Hello, {name}!")
 
-    def __call__(self, *args, **kwargs):
-        print("Before the function is called")
-        result = self.func(*args, **kwargs)
-        print("After the function is called")
-        return result
 
-@MyDecorator
-def say_hello(name):
-    print(f"Hello, {name}!")
-
-
-say_hello("Eve")  # 这种用法也是正确的
+# say_hello("Eve")  # 这种用法也是正确的
 # Before the function is called
 # Hello, Eve!
 # After the function is called
@@ -99,8 +99,56 @@ say_hello("Eve")  # 这种用法也是正确的
 # m()  # TypeError: 'NoneType' object is not callable
 
 
-t = MyDecorator(say_hello("winky"))  # 这种用法也是正确的
+# t = MyDecorator(say_hello("winky"))  # 这种用法也是正确的
 # t()  # TypeError: 'NoneType' object is not callable    # 这里t拿到的是装饰器MyDecorator的__call__返回的result，result是None，不可被调用not callable
 # Before the function is called
 # Hello, winky!
 # After the function is called
+
+# def decorator_a(func):
+#     def wrapper():
+#         print("Decorator A before function call")
+#         func()
+#         print("Decorator A after function call")
+#     return wrapper
+#
+# def decorator_b(func):
+#     def wrapper():
+#         print("Decorator B before function call")
+#         func()
+#         print("Decorator B after function call")
+#     return wrapper
+#
+# def decorator_c(func):
+#     def wrapper():
+#         print("Decorator C before function call")
+#         func()
+#         print("Decorator C after function call")
+#     return wrapper
+#
+# @decorator_a
+# @decorator_b
+# @decorator_c
+# def my_function():
+#     print("Function body")
+#
+#
+# my_function()
+
+
+class ClassDecorator:
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self):
+        print("Inside ClassDecorator __call__")
+        self.func()
+
+@ClassDecorator
+def my_func():
+    print("Inside my_func")
+
+# 调用时: my_func()
+my_func()
+
+
