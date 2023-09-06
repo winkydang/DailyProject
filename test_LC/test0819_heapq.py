@@ -49,3 +49,12 @@
 # print('node: ', node)
 #
 # print(arr)
+
+
+# str = 'ad、报错、节点、'
+# print(str[:-1])  # ad、报错、节点
+
+
+
+
+
