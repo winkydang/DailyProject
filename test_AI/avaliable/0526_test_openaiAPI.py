@@ -11,7 +11,7 @@ proxies = {'http': "http://127.0.0.1:7890",
 openai.proxy = proxies
 
 # 设置 OpenAI API 密钥
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = ""
 
 # 设置SerpApi API 密钥
 os.environ["SERPAPI_API_KEY"] = "be810684e6058f5286be699986dd25bad5bda01e17aa9675f3e37674dd15a71c"
