@@ -24,8 +24,8 @@ def dm_label_sns_countplot():
     plt.rc('font', **font)
 
     # 2 pd.read_csv 读训练集 验证集数据  返回类型是DataFrame类型
-    train_data = pd.read_csv(filepath_or_buffer='../cn_data/train.tsv', sep='\t')
-    dev_data = pd.read_csv(filepath_or_buffer='../cn_data/dev.tsv', sep='\t')
+    train_data = pd.read_csv(filepath_or_buffer='../../cn_data/train.tsv', sep='\t')
+    dev_data = pd.read_csv(filepath_or_buffer='../../cn_data/dev.tsv', sep='\t')
 
     # 3 sns.countplot() 统计label标签的0、1分组数量
     sns.countplot(x='label', data=train_data)  # using the Seaborn library in Python to create a count plot based on the data in the train_data DataFrame.
