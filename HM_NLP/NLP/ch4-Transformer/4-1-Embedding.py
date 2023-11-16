@@ -36,28 +36,43 @@ class Embeddings(nn.Module):
         return self.lut(x) * math.sqrt(self.d_model)
 
 
-# 然后创建Embeddings类的实例
-embedding_layer = Embeddings(d_model=3, vocab=10)
+# # 例1，使用自定义的Embeddings类
+# # 然后创建Embeddings类的实例
+# embedding_layer = Embeddings(d_model=3, vocab=10)
+#
+# # 接着创建输入数据
+# input_data = torch.LongTensor([[1, 2, 4, 5], [4, 3, 2, 9]])  # 这些数字表示词汇在词表中的索引。词嵌入的作用就是将文本中词汇的数字表示转变为向量表示
+#
+# # 最后通过Embeddings实例来得到嵌入向量
+# embedded_input = embedding_layer(input_data)
+# print(embedded_input)
+# print(type(embedded_input))  # 查看类型，  <class 'torch.Tensor'>
+# print(embedded_input.shape)  # 查看tensor的形状大小，，torch.Size([2, 4, 3])
 
-# 接着创建输入数据
-input_data = torch.LongTensor([[1, 2, 4, 5], [4, 3, 2, 9]])  # 这些数字表示词汇在词表中的索引。词嵌入的作用就是将文本中词汇的数字表示转变为向量表示
 
-# 最后通过Embeddings实例来得到嵌入向量
-embedded_input = embedding_layer(input_data)
-print(embedded_input)
-print(type(embedded_input))  # 查看类型，  <class 'torch.Tensor'>
-print(embedded_input.shape)  # 查看tensor的形状大小，，torch.Size([2, 4, 3])
-
-
+# # 例2，使用nn.Embedding
 # embedding = nn.Embedding(10, 3)
 # input = torch.LongTensor([[1,2,4,5],[4,3,2,9]])
+# # input = torch.Tensor([[1,2,4,5],[4,3,2,9]])  # float类型的数据送入embedding中会报错。
+# print(embedding(input))
+# print(type(embedding(input)))
+# print(embedding(input).shape)
+
+
+# # # 例3，关于padding_idx=0
+# embedding = nn.Embedding(10, 3, padding_idx=0)
+# input = torch.LongTensor([[0,2,0,5]])
 # print(embedding(input))
 
+def dm_test_Embeddings():
+    d_model = 512   # 词嵌入维度是512维
+    vocab = 1000    # 词表大小是1000
+    # 实例化词嵌入层
+    my_embeddings = Embeddings(d_model, vocab)
+    x = Variable(torch.LongTensor([[100,2,421,508],[491,998,1,221]]))
+    embed = my_embeddings(x)
+    print('embed.shape', embed.shape, '\nembed--->\n',embed)
 
 
-
-
-
-
-
+dm_test_Embeddings()
 
